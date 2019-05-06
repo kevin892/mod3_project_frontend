@@ -1,0 +1,51 @@
+.icon-block {
+  font-size: 50px;
+  float: right;
+  margin-right: 100px;
+  color: yellow
+
+}
+
+/* .fas{
+  font-size: 50px;
+  float: right;
+  margin-right: 50px
+} */
+
+
+ h1 {
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 40px;
+  margin-top: 50px;
+}
+
+
+.col-sm {
+  border: 3px solid black;
+  background-color: #4f9da6;
+  text-align: left;
+  border-radius: 25px;
+  margin: 20px;
+
+}
+
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    transform: scale(1.05);
+}

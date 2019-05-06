@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson App</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+  <h1 class="title">Welcome to Lessons!</h1>
+  <div class="container">
+
+    <form class="lesson-form" method="POST">
+      <b>Lesson:</b> <input type="text" name="name">
+      <br><br>
+      <b>Github URL: </b><input type="text" name="code">
+      <br><br>
+      <b>YouTube URL: </b><input type="text" name="video">
+      <br><br>
+      <b>Instructor:</b>
+      <select name="instructor">
+        <option value=""></option>
+        <option value="damon">Damon</option>
+        <option value="dina">Dina</option>
+        <option value="kevin">Kevin</option>
+        <option value="kyle">Kyle</option>
+        <option value="mark">Mark</option>
+        <option value="vui">Vui</option>
+      </select>
+      <br><br>
+      <b>Module:</b>
+      <select name="mod_id">
+        <option value=""></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <!-- <option value="3">4</option>
+        <option value="5">5</option> -->
+      </select>
+      <br><br>
+      <input type="submit" value="Add Lesson">
+    </form><br><br>
+
+    <script type="text/javascript" src="./src/app.js"></script>
+
+</body>
+
+</html>
