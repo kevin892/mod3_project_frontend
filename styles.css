@@ -5,14 +5,13 @@
   color: yellow
 
 }
+body {
+  background-color: #f6e0b3 !important;
+}
 
-/* .fas{
-  font-size: 50px;
-  float: right;
-  margin-right: 50px
-} */
-
-
+ /* html {
+   background-color: blue;
+ } */
  h1 {
   text-align: center;
 }
@@ -30,6 +29,11 @@
   border-radius: 25px;
   margin: 20px;
 
+}
+
+form {
+  border: 3px solid black;
+  padding: 30px;
 }
 
 

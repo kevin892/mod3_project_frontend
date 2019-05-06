@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const endPoint = 'http://localhost:3000/api/v1/lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form")
+  lessonForm.style.display = "none"
 
 
   function createElement(element) {
@@ -17,6 +18,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   function addClass(element, className) {
     return element.classList.add(className)
   }
+
+
+     const toggleButton = document.querySelector(".toggle-button")
+
+     toggleButton.addEventListener("click", function() {
+       if(lessonForm.style.display == '' || lessonForm.style.display == "block")
+          lessonForm.style.display = 'none';
+       else
+          lessonForm.style.display = 'block';
+     })
+
+
 
 
   function makeLesson(lesson) {
@@ -33,6 +46,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
      deleteButton = createElement("button")
 
      lessonName.innerHTML = lesson.name;
+
      lessonInstructor.innerHTML = lesson.instructor;
 
      if (lesson.mod_id) {
@@ -48,6 +62,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
      deleteButton.innerHTML = "Delete"
      deleteButton.classList.add(lesson.id)
      lessonDiv.classList.add("col-sm")
+     lessonDiv.classList.add("hvr-grow")
+
 
      deleteButton.addEventListener("click", function(event) {
        let lessonId = parseInt(this.classList[0])
@@ -75,6 +91,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   lessonForm.addEventListener("submit", function(event) {
     event.preventDefault()
+
     const formData = new FormData(event.target),
       name = formData.get("name"),
       code = formData.get("code"),
@@ -89,7 +106,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         mod_id: parseInt(mod),
         likes: 0,
       }
+
+      // document.write(`${data.name} was added!`)
+
+      // function loadPage(){
+      //   return location.reload();
+      // }
       makeLesson(data)
+      // window.setTimeout(loadPage, 2000)
+          this.reset()
     fetch(endPoint, {
         method: "POST",
         body: JSON.stringify(data),
@@ -100,16 +125,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch(error => console.log(error))
   })
-
-
-  // const deleteLesson = (lessonId) => {
-  //   return fetch(`${endPoint}/${lessonId}`, {
-  //     method: "DELETE",
-  //   })
-  //   .then(res => res.json())
-  // }
-  //
-
 
 
 function deleteLesson(lessonId) {
