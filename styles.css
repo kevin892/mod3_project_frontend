@@ -1,23 +1,19 @@
-/* .icon-block {
-  font-size: 50px;
-  float: right;
-  margin-right: 100px;
-  color: yellow
-} */
 .navbar-nav {
-    float:none;
-    margin:0 auto;
-    display: block;
-    text-align: center;
+  float: none;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
 }
+
 .navbar {
   margin-bottom: 40px !important;
 }
 
-.navbar-nav > li {
-    display: inline-block;
-    float:none;
+.navbar-nav>li {
+  display: inline-block;
+  float: none;
 }
+
 body {
   background-color: #CAEBF2 !important;
 }
@@ -26,13 +22,10 @@ body {
   font-size: 60px;
 }
 
-/* html {
-   background-color: blue;
- } */
 h1 {
   text-align: center;
   font-size: 75px !important;
-    font-family: 'Abril Fatface', cursive !important;
+  font-family: 'Abril Fatface', cursive !important;
 }
 
 h2 {
@@ -47,9 +40,8 @@ h2 {
   margin-top: 50px;
 }
 
-
 .col-sm {
-  /* border: 1px solid grey; */
+  border: 3px outset grey;
   background-image: url(/images/flashcard.png);
   background-size: 420px;
   text-align: right;
@@ -89,7 +81,6 @@ h2 {
   cursor: pointer;
   position: absolute;
   top: 250px;
-
 }
 
 .hvr-grow {
@@ -134,30 +125,26 @@ h2 {
   bottom: 100px;
   right: 40px;
   opacity: 0.9;
-
 }
-
 
 .like-icon {
   cursor: pointer;
   font-size: 40px;
-  color: #facf5a;;
+  color: #facf5a;
+  ;
   position: absolute;
   bottom: 30px;
   left: 50px;
-
 }
 
- .video-icon {
+.video-icon {
   font-size: 90px;
   color: #df0054;
   position: absolute;
   bottom: 100px;
   right: 170px;
   opacity: 0.8;
-
 }
-
 
 .lesson-likes {
   position: absolute;
@@ -178,6 +165,7 @@ h2 {
   -webkit-transition-property: transform;
   transition-property: transform;
 }
+
 .hvr-shrink:hover, .hvr-shrink:focus, .hvr-shrink:active {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
