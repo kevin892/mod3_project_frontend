@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
-
+  const store = {}
   const endPoint = 'http://localhost:3000/api/v1/lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     else
       lessonForm.style.display = 'block';
   });
-
-
 
 
   function makeLesson(lesson) {
@@ -93,10 +91,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     videoIcon.classList.add("video-icon");
     videoIcon.classList.add("hvr-shrink");
 
+    lessonLikes.classList.add("lesson-likes")
+
     likeButton.classList.add("fas");
     likeButton.classList.add("fa-star");
     likeButton.classList.add("like-icon");
     likeButton.classList.add("hvr-grow");
+    likeButton.id = lesson.id
 
 
     contentDiv.classList.add("content-div");
@@ -114,10 +115,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
       deleteLesson(lessonId);
     });
 
+
     likeButton.addEventListener("click", function(event) {
-      this.classList.add("animate");
-      this.classList.add("bounceOut");
-      console.log("Clicked!");
+      let likeNum = this.parentElement
+      likeNum.innerText = parseInt(likeNum.innerText) + 1
+              likeLesson(parseInt(this.id), parseInt(likeNum.innerText))
     });
 
     append(lessonDiv, lessonName);
@@ -125,12 +127,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     append(contentDiv, lessonMod);
     append(lessonDiv, lessonVideo);
     append(lessonDiv, lessonCode);
+    append(lessonLikes, likeButton);
     append(lessonDiv, lessonLikes);
     append(lessonDiv, deleteButton);
     append(lessonDiv, editButton);
     append(lessonCode, codeIcon);
     append(lessonVideo, videoIcon);
-    append(lessonDiv, likeButton);
     append(lessonDiv, contentDiv);
     append(container, lessonDiv);
   }
@@ -144,6 +146,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
   lessonForm.addEventListener("submit", function(event) {
+    location.reload()
     event.preventDefault();
 
     const formData = new FormData(event.target),
@@ -154,8 +157,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       mod = formData.get("mod_id");
     const data = {
       name: name,
-      code: code,
-      video: video,
+      code: code.substring(8),
+      video: video.substring(8),
       instructor: instructor,
       mod_id: parseInt(mod),
       likes: 0,
@@ -182,4 +185,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch(error => console.log(error));
   }
+
+
+
+
+  function likeLesson(lessonId, data) {
+    return fetch(endPoint + `/${lessonId}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({likes: data})
+    });
+  }
+
 });
