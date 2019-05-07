@@ -60,9 +60,13 @@ h2 {
   box-shadow: 10px 10px grey !important;
 }
 
-form {
+.lesson-form {
   border: 3px solid black;
   padding: 30px;
+}
+
+.search-form {
+  text-align: right;
 }
 
 .delete-button {
@@ -70,11 +74,22 @@ form {
   font-size: 20px;
   position: absolute;
   bottom: 30px;
-  right: 40px;
+  right: 50px;
+}
+
+.edit-button {
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
 }
 
 .toggle-button {
-  cursor: pointer
+  cursor: pointer;
+  position: absolute;
+  top: 250px;
+
 }
 
 .hvr-grow {
@@ -109,7 +124,7 @@ form {
 
 .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
   /* background-color: #2098D1; */
-  color: #76a21e;
+  color: #30A54B;
 }
 
 .code-icon {
@@ -122,13 +137,14 @@ form {
 
 }
 
+
 .like-icon {
   cursor: pointer;
-  font-size: 30px;
-  color: black;;
+  font-size: 40px;
+  color: #facf5a;;
   position: absolute;
   bottom: 30px;
-  left: 40px;
+  left: 50px;
 
 }
 
@@ -145,8 +161,10 @@ form {
 
 .lesson-likes {
   position: absolute;
+  font-size: 20px;
   bottom: 10px;
   left: 20px;
+  font-family: 'Acme', sans-serif;
 }
 
 .hvr-shrink {

@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
      codeIcon = createElement("i"),
      lessonLikes = createElement("p");
      deleteButton = createElement("i")
+     editButton = createElement("i")
      likeButton = createElement("i")
      contentDiv = createElement("div")
 
@@ -77,6 +78,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
      deleteButton.classList.add("delete-button")
      deleteButton.classList.add("hvr-grow")
 
+
+     editButton.classList.add("edit-button")
+     editButton.classList.add("fas")
+     editButton.classList.add("fa-edit")
+     editButton.classList.add("hvr-grow")
+
      codeIcon.classList.add("fa-github-square")
      codeIcon.classList.add("fab")
      codeIcon.classList.add("code-icon")
@@ -88,10 +95,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
      videoIcon.classList.add("hvr-shrink")
 
      likeButton.classList.add("fas")
-     likeButton.classList.add("fa-thumbs-up")
+     likeButton.classList.add("fa-star")
      likeButton.classList.add("like-icon")
      likeButton.classList.add("hvr-grow")
-    
+
 
      contentDiv.classList.add("content-div")
 
@@ -121,6 +128,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
      append(lessonDiv, lessonCode);
      append(lessonDiv, lessonLikes);
      append(lessonDiv, deleteButton)
+     append(lessonDiv, editButton);
      append(lessonCode, codeIcon)
      append(lessonVideo, videoIcon)
      append(lessonDiv, likeButton)
