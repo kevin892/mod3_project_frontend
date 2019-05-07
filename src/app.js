@@ -2,7 +2,44 @@
 
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
-  const store = {}
+
+
+
+
+  function selectPage(mod) {
+    let currentDivs = document.querySelectorAll(".col-sm")
+    currentDivs.forEach(name => name.classList.add("gone"))
+
+    fetch(`http://localhost:3000/api/v1/mods/${mod}`)
+      .then(response => response.json())
+      .then(function(array) {
+        array.lessons.map(person => {
+          makeLesson(person);
+        });
+      });
+  }
+
+
+  document.addEventListener("click", function(event) {
+
+    switch (event.target.classList[1]) {
+      case "mod-1-head":
+        return selectPage(1);
+      case "mod-2-head":
+        return selectPage(2)
+      case "mod-3-head":
+        return selectPage(3)
+      case "mod-4-head":
+        return selectPage("4")
+      case "mod-5-head":
+        return selectPage("5")
+      case "home-head":
+        let currentDivs = document.querySelectorAll(".col-sm")
+        currentDivs.forEach(name => name.classList.add("gone"))
+        return mainFetch();
+    }
+  })
+
   const endPoint = 'http://localhost:3000/api/v1/lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
@@ -30,6 +67,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     else
       lessonForm.style.display = 'block';
   });
+
+
+
 
 
   function makeLesson(lesson) {
@@ -81,6 +121,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     editButton.classList.add("fa-edit");
     editButton.classList.add("hvr-grow");
 
+    addFormListener(editButton)
+
+
+
     codeIcon.classList.add("fa-github-square");
     codeIcon.classList.add("fab");
     codeIcon.classList.add("code-icon");
@@ -119,7 +163,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     likeButton.addEventListener("click", function(event) {
       let likeNum = this.parentElement
       likeNum.innerText = parseInt(likeNum.innerText) + 1
-              likeLesson(parseInt(this.id), parseInt(likeNum.innerText))
+      likeLesson(parseInt(this.id), parseInt(likeNum.innerText))
     });
 
     append(lessonDiv, lessonName);
@@ -137,16 +181,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     append(container, lessonDiv);
   }
 
-  fetch(endPoint)
-    .then(response => response.json())
-    .then(function(array) {
-      array.map(person => {
-        makeLesson(person);
+
+  function mainFetch() {
+    fetch(endPoint)
+      .then(response => response.json())
+      .then(function(array) {
+        array.map(person => {
+          makeLesson(person);
+        });
       });
-    });
+  }
+  mainFetch()
 
   lessonForm.addEventListener("submit", function(event) {
-    location.reload()
     event.preventDefault();
 
     const formData = new FormData(event.target),
@@ -155,29 +202,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
       video = formData.get("video"),
       instructor = formData.get("instructor"),
       mod = formData.get("mod_id");
-    const data = {
-      name: name,
-      code: code.substring(8),
-      video: video.substring(8),
-      instructor: instructor,
-      mod_id: parseInt(mod),
-      likes: 0,
-    };
 
-    makeLesson(data);
-    this.reset();
-    lessonForm.style.display = "none";
-    fetch(endPoint, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      })
-      .catch(error => console.log(error));
+    if (name == "" || instructor == "" || mod == "") {
+      swal("Please enter in all of the fields.");
+      code.focus();
+    } else {
+      const data = {
+        name: name,
+        code: code.substring(8),
+        video: video.substring(8),
+        instructor: instructor,
+        mod_id: parseInt(mod),
+        likes: 0,
+      };
+      swal(`${data.name} was added!`)
+      setTimeout(window.location.reload.bind(window.location), 3000);
+      makeLesson(data);
+      this.reset();
+
+      lessonForm.style.display = "none";
+      fetch(endPoint, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        .catch(error => console.log(error));
+    }
   });
-
 
   function deleteLesson(lessonId) {
     return fetch(`${endPoint}/${lessonId}`, {
@@ -195,8 +249,113 @@ document.addEventListener('DOMContentLoaded', (event) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({likes: data})
+      body: JSON.stringify({
+        likes: data
+      })
     });
   }
+
+
+  // function addEditForm() {
+  //   const editForm = createElement("form")
+  //   debugger
+  //
+  // }
+  //
+
+searchIcon = document.querySelector(".search-icon")
+
+searchIcon.addEventListener("click", beginSearch)
+
+
+  function addFormListener(formElement) {
+    formElement.addEventListener("click", function(event) {
+      swal("Hello world!");
+
+    })
+  }
+
+
+
+
+
+
+function beginSearch(){
+  swal({
+    text: 'Search for a lesson. e.g. "Ruby Froms".',
+    content: "input",
+    button: {
+      text: "Search!",
+      closeModal: false,
+    },
+  })
+  .then(name => {
+    // if (!name) throw null;
+    match(name, endPoint);
+  })
+}
+  // .then(results => {
+  //   return results.json();
+  // })
+  // .then(json => {
+  //   const store = json;
+  //   store.filter(lesson => {
+  //     debugger
+  //   })
+
+    // if (!movie) {
+    //   return swal("No movie was found!");
+    // }
+
+  //   swal({
+  //     title: "Top result:",
+  //     text: name,
+  //     icon: imageURL,
+  //   });
+  // })
+  // .catch(err => {
+  //   if (err) {
+  //     swal("Oh noes!", "The AJAX request failed!", "error");
+  //   } else {
+
+  //   }
+  // });
+
+function match(names, url){
+return fetch(url)
+.then(results => {
+  return results.json();
+})
+.then(json => {
+  return json.filter(lesson => {
+    console.log(names);
+    return lesson.name.includes(names)
+  })
+})
+
+
+
+.then(function(array){
+  let currentDivs = document.querySelectorAll(".col-sm")
+  currentDivs.forEach(name => name.classList.add("gone"))
+  checkEmpty(array)
+    array.map(person => {
+      makeLesson(person);
+          swal.stopLoading();
+          swal.close();
+    });
+})
+
+
+
+}
+function checkEmpty(array){
+  if (!array[0]) {
+    swal("Nothing was Found!")
+    setTimeout(window.location.reload.bind(window.location), 2000)
+  }
+}
+
+
 
 });

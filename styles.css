@@ -55,7 +55,29 @@ h2 {
 .lesson-form {
   border: 3px solid black;
   padding: 30px;
+  width: 500px;
 }
+
+.form-instructor {
+  width: 200px !important;
+}
+.form-mod {
+  width: 100px !important;
+  height: 400px;
+}
+
+.mod-form-div {
+  position: absolute;
+  top: 638px;
+  left: 375px;
+}
+.form-add-button {
+  width: 440px;
+  height: 50px;
+  position: absolute;
+  top: 750px;
+}
+
 
 .search-form {
   text-align: right;
@@ -117,7 +139,9 @@ h2 {
 .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
   color: #30A54B;
 }
-
+.nav-link {
+  cursor: pointer;
+}
 .code-icon {
   font-size: 90px;
   color: #385170;
@@ -176,4 +200,8 @@ h2 {
   top: 150px;
   left: 10px;
   font-family: 'Acme', sans-serif;
+}
+
+.gone {
+  display: none;
 }
