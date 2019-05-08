@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>LecSure📝</title>
+  <title>ModMap📝</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -11,6 +11,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Acme|Caveat|Kalam|Open+Sans|Permanent+Marker" rel="stylesheet">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lalezar|Questrial|Righteous" rel="stylesheet">
 
 
 </head>
@@ -18,12 +19,12 @@
 <body>
 
   <div class="title-dive">
-    <h1 class="title animated bounceInLeft">Welcome to LecSure!</h1>
+    <h1 class="title animated bounceInLeft">ModMap</h1>
   </div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link home-head hvr-grow" href="#">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link home-head hvr-grow" href="#">All<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link mod-1-head hvr-grow" href="#">Mod 1</a>
@@ -54,13 +55,16 @@
 
 
     <form class="lesson-form form-group" method="POST">
-      <b>Lesson:</b> <input type="textarea" class="form-control form-name" name="name">
-      <br><br>
-      <b>Github URL: </b><input type="text" class="form-control" name="code">
-      <br><br>
-      <b>YouTube URL: </b><input type="text" class="form-control" name="video">
-      <br><br>
-      <b>Instructor:</b>
+      <label for="name" class="col-sm-2 col-form-label">Lesson:</label>
+      <input type="text" class="form-control form-name" name="name">
+      <br>
+      <label for="code" class="col-sm-2 col-form-label">GitHub:</label>
+      <input type="text" class="form-control" name="code">
+      <br>
+      <label for="video" class="col-sm-2 col-form-label">YouTube:</label>
+      <input type="text" class="form-control" name="video">
+      <br>
+      <label for="instructor" class="col-sm-2 col-form-label">Instructor:</label>
       <select name="instructor" class="form-control form-instructor form-control-lg">
         <option value=""></option>
         <option value="Damon">Damon</option>
@@ -72,9 +76,9 @@
         <option value="Vui">Vui</option>
         <option value="Other">Other</option>
       </select>
-      <br><br>
+      <br>
       <div class="mod-form-div">
-      <b>Module:</b>
+      <label for="mod_id" class="col-sm-2 col-form-label">Mod:</label>
       <select name="mod_id" class="form-control form-mod form-control-lg">>
         <option value=""></option>
         <option value="1">1</option>
@@ -87,7 +91,7 @@
       </select>
       </div>
       <br><br>
-      <button type="submit" class="btn btn-success form-add-button">Add!</button>
+      <button type="submit" class="btn btn-success form-add-button">Add</button>
       <!-- <input type="submit" value="Add Lesson"> -->
     </form><br><br>
 

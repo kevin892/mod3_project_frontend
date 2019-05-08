@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
   const toggleButton = document.querySelector(".toggle-button");
-
   toggleButton.addEventListener("click", function() {
     if (lessonForm.style.display == '' || lessonForm.style.display == "block")
       lessonForm.style.display = 'none';
@@ -88,9 +87,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     lessonInstructor.innerHTML = "Instructor: " + lesson.instructor;
 
     if (lesson.mod_id) {
-      lessonMod.innerHTML = "Module: " + lesson.mod_id;
+      lessonMod.innerHTML = "Mod: " + lesson.mod_id;
     } else {
-      lessonMod.innerHTML = "Module: " + lesson.mod.name;
+      lessonMod.innerHTML = "Mod: " + lesson.mod.name;
     }
     if (lesson.video) {
       lessonVideo.href = "http://" + lesson.video;
@@ -225,10 +224,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         mod_id: parseInt(mod),
         likes: 0,
       };
-      swal(`${data.name} was added!`);
-      // setTimeout(window.location.reload.bind(window.location), 3000);
+      swal("Sweet!", `${data.name} was added!`, "success");
+      // setTimeout(window.location.reload.bind(window.location), 2000);
       makeLesson(data);
-      // this.reset();
+      this.reset();
 
       lessonForm.style.display = "none";
       fetch(endPoint, {
@@ -269,6 +268,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   searchIcon.addEventListener("click", beginSearch);
 
+
   function addFormListener(formElement) {
     formElement.addEventListener("click", function(event) {
       swal("Edit Functionality Coming Soon!");
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   function beginSearch() {
     swal({
-        text: 'Search for a lesson. e.g. "Ruby Froms".',
+        text: 'Search for a lesson. e.g. "SQL".',
         content: "input",
         button: {
           text: "Search!",
