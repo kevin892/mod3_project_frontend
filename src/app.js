@@ -63,10 +63,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       lessonForm.style.display = 'block';
   });
 
-
-
-
-
   function makeLesson(lesson) {
     const lessonDiv = createElement("div"),
       lessonName = createElement("h2"),
@@ -110,15 +106,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     deleteButton.classList.add("delete-button");
     deleteButton.classList.add("hvr-grow");
 
-
     editButton.classList.add("edit-button");
     editButton.classList.add("fas");
     editButton.classList.add("fa-edit");
     editButton.classList.add("hvr-grow");
-
-    addFormListener(editButton);
-
-
 
     codeIcon.classList.add("fa-github-square");
     codeIcon.classList.add("fab");
@@ -138,7 +129,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     likeButton.classList.add("hvr-grow");
     likeButton.id = lesson.id;
 
-
     contentDiv.classList.add("content-div");
 
     lessonDiv.classList.add("col-sm");
@@ -146,7 +136,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     lessonLikes.classList.add("lesson-likes");
 
-
+    addFormListener(editButton);
+    
     deleteButton.addEventListener("click", function(event) {
       swal({
           title: "Are you sure you want to delete this lesson?",
