@@ -147,11 +147,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     lessonLikes.classList.add("lesson-likes");
 
-    deleteButton.addEventListener("click", function(event) {
-      let lessonId = parseInt(this.id);
 
-      this.parentElement.remove();
-      deleteLesson(lessonId);
+    deleteButton.addEventListener("click", function(event) {
+      swal({
+          title: "Are you sure you want to delete this lesson?",
+          // text: "This cannot be undone!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            let lessonId = parseInt(this.id);
+            this.parentElement.remove();
+            deleteLesson(lessonId);
+            swal("Lesson has been deleted!", {
+              icon: "success",
+            });
+          } else {
+            swal("Pheww...That was close!");
+          }
+        });
     });
 
     likeButton.addEventListener("click", function(event) {
@@ -305,6 +321,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       setTimeout(window.location.reload.bind(window.location), 2000);
     }
   }
+
+
 
 
 
