@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     } else {
       lessonCode.style.display = "none";
     }
-    lessonCode.href = "http://" + lesson.code;
+    // lessonCode.href = "http://" + lesson.code;
     lessonLikes.innerHTML = lesson.likes;
     deleteButton.id = lesson.id;
     deleteButton.classList.add("fa-trash-alt");
@@ -137,11 +137,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     lessonLikes.classList.add("lesson-likes");
 
     addFormListener(editButton);
-    
+
     deleteButton.addEventListener("click", function(event) {
       swal({
           title: "Are you sure you want to delete this lesson?",
-          // text: "This cannot be undone!",
           icon: "warning",
           buttons: true,
           dangerMode: true,
@@ -240,7 +239,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .catch(error => console.log(error));
   }
 
+  function editLessonVideo(lessonId, videoUrl) {
+    return fetch(endPoint + `/${lessonId}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        video: videoUrl
+      })
+    }).then(swal("Success!!", "Lesson was updated!", "success"),
+      setTimeout(window.location.reload.bind(window.location), 2000))
+  }
 
+  function editLessonCode(lessonId, codeUrl) {
+    return fetch(endPoint + `/${lessonId}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        code: codeUrl
+      })
+    }).then(swal("Success!!", "Lesson was updated!", "success"),
+      setTimeout(window.location.reload.bind(window.location), 2000))
+  }
 
 
   function likeLesson(lessonId, data) {
@@ -260,9 +283,68 @@ document.addEventListener('DOMContentLoaded', (event) => {
   searchIcon.addEventListener("click", beginSearch);
 
 
+  function editUi(id, video, code) {
+
+    swal("Which Lesson Type which you like to edit?", {
+        buttons: {
+          github: {
+            text: "GitHub Url",
+            value: "github"
+          },
+          youtube: {
+            text: "YouTube Url",
+            value: "youtube",
+          },
+          danger: {
+            text: "Exit",
+            value: "exit",
+          }
+        },
+      })
+      .then((value) => {
+
+        if (value === "youtube") {
+          swal(`Current Value: ${video}`, {
+              title: "What would you like to change it to?",
+              content: "input",
+            })
+            .then((value) => {
+              editLessonVideo(lessonId, value)
+            });
+        } else if (value === "github") {
+          swal(`Current Value: ${code}`, {
+              title: "What would you like to change it to?",
+              content: "input",
+            })
+            .then((value) => {
+              editLessonCode(lessonId, value)
+            });
+        } else {
+          swal("Nevermind");
+        }
+      });
+
+  }
+
+
   function addFormListener(formElement) {
     formElement.addEventListener("click", function(event) {
-      swal("Edit Functionality Coming Soon!");
+
+      lessonId = this.parentElement.querySelectorAll("i")[3].id
+      videoUrl = this.parentElement.querySelectorAll("a")[0].href
+      codeUrl = this.parentElement.querySelectorAll("a")[1].href
+
+      editUi(lessonId, videoUrl, codeUrl)
+
+      //
+      //       let newCode = prompt("Please Enter Gitub URL"),
+      //        newVideo = prompt("Please Enter Video URL"),
+      //
+      //
+      //
+      //
+
+      // swal("Edit Functionality Coming Soon!");
 
     });
   }
@@ -312,8 +394,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       setTimeout(window.location.reload.bind(window.location), 2000);
     }
   }
-
-
 
 
 
