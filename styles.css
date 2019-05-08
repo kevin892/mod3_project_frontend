@@ -59,7 +59,7 @@ h2 {
   box-shadow: 10px 10px grey !important;
   background-color: rgb(248,249,250);
   font-size: 20px;
-  font-family: 'Questrial', sans-serif;
+  font-family: 'Francois One', sans-serif;
 }
 
 .form-instructor {
@@ -193,7 +193,7 @@ hr {
   font-size: 20px;
   bottom: 10px;
   left: 20px;
-  font-family: 'Acme', sans-serif;
+  font-family: 'Francois One', sans-serif;
 }
 
 .hvr-shrink {
@@ -217,7 +217,7 @@ hr {
   position: absolute;
   top: 150px;
   left: 10px;
-  font-family: 'Acme', sans-serif;
+  font-family: 'Francois One', sans-serif;
 }
 
 .gone {
