@@ -13,26 +13,24 @@
   display: inline-block;
   float: none;
 }
-/*
+
 body {
   background-color: #CAEBF2 !important;
-} */
-
-.toggle-button {
-  font-size: 60px;
 }
+
+
 
 h1 {
   text-align: center;
   font-size: 75px !important;
-  /* font-family: 'Abril Fatface', cursive !important; */
+  font-family: 'Abril Fatface', cursive !important;
 }
 
 h2 {
   padding-top: 20px !important;
   text-align: center;
   font-size: 35px !important;
-  /* font-family: 'Kalam', cursive; */
+  font-family: 'Kalam', cursive;
 }
 
 .title {
@@ -42,20 +40,22 @@ h2 {
 
 .col-sm {
   border: 3px outset grey;
-  /* background-image: url(/images/flashcard.png); */
+  background-image: url(/images/flashcard.png);
   background-size: 420px;
   text-align: right;
   border-radius: 5px;
   margin: 10px;
   height: 20rem;
   width: 32rem !important;
-  /* box-shadow: 10px 10px grey !important; */
+  box-shadow: 10px 10px grey !important;
 }
 
 .lesson-form {
-  border: 3px solid black;
+  /* border: 3px outset grey; */
   padding: 30px;
   width: 500px;
+  box-shadow: 10px 10px grey !important;
+  background-color: rgb(248,249,250);
 }
 
 .form-instructor {
@@ -68,20 +68,17 @@ h2 {
 
 .mod-form-div {
   position: absolute;
-  top: 638px;
+  top: 665px;
   left: 375px;
 }
 .form-add-button {
   width: 440px;
   height: 50px;
   position: absolute;
-  top: 750px;
+  top: 770px;
 }
 
 
-.search-form {
-  text-align: right;
-}
 
 .delete-button {
   cursor: pointer;
@@ -101,10 +98,24 @@ h2 {
 
 .toggle-button {
   cursor: pointer;
+  font-size: 60px;
   position: absolute;
   top: 180px;
+  left: 250px;
 
 }
+hr {
+  margin-top: 50px !important;
+
+}
+.search-icon{
+    cursor: pointer;
+    font-size: 40px;
+    position: absolute;
+    top: 190px;
+    right: 250px;
+  }
+
 
 .hvr-grow {
   display: inline-block;
@@ -139,6 +150,9 @@ h2 {
 .hvr-fade:hover, .hvr-fade:focus, .hvr-fade:active {
   color: #30A54B;
 }
+.hvr-fade-also:hover, .hvr-fade-also:focus, .hvr-fade-also:active {
+  color: #0075f6;
+}
 .nav-link {
   cursor: pointer;
 }
@@ -154,7 +168,7 @@ h2 {
 .like-icon {
   cursor: pointer;
   font-size: 40px;
-  /* color: #facf5a; */
+  color: #facf5a;
   ;
   position: absolute;
   bottom: 1px;

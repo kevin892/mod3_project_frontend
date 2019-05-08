@@ -3,12 +3,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
-
-
-
   function selectPage(mod) {
-    let currentDivs = document.querySelectorAll(".col-sm")
-    currentDivs.forEach(name => name.classList.add("gone"))
+    let currentDivs = document.querySelectorAll(".col-sm");
+    currentDivs.forEach(name => name.classList.add("gone"));
 
     fetch(`http://localhost:3000/api/v1/mods/${mod}`)
       .then(response => response.json())
@@ -19,26 +16,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
       });
   }
 
-
   document.addEventListener("click", function(event) {
 
     switch (event.target.classList[1]) {
       case "mod-1-head":
         return selectPage(1);
       case "mod-2-head":
-        return selectPage(2)
+        return selectPage(2);
       case "mod-3-head":
-        return selectPage(3)
+        return selectPage(3);
       case "mod-4-head":
-        return selectPage("4")
+        return selectPage(4);
       case "mod-5-head":
-        return selectPage("5")
+        return selectPage(5);
       case "home-head":
-        let currentDivs = document.querySelectorAll(".col-sm")
-        currentDivs.forEach(name => name.classList.add("gone"))
+        let currentDivs = document.querySelectorAll(".col-sm");
+        currentDivs.forEach(name => name.classList.add("gone"));
         return mainFetch();
     }
-  })
+  });
 
   const endPoint = 'http://localhost:3000/api/v1/lessons';
   const container = document.querySelector(".container");
@@ -121,7 +117,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     editButton.classList.add("fa-edit");
     editButton.classList.add("hvr-grow");
 
-    addFormListener(editButton)
+    addFormListener(editButton);
 
 
 
@@ -135,13 +131,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     videoIcon.classList.add("video-icon");
     videoIcon.classList.add("hvr-shrink");
 
-    lessonLikes.classList.add("lesson-likes")
+    lessonLikes.classList.add("lesson-likes");
 
     likeButton.classList.add("fas");
     likeButton.classList.add("fa-star");
     likeButton.classList.add("like-icon");
     likeButton.classList.add("hvr-grow");
-    likeButton.id = lesson.id
+    likeButton.id = lesson.id;
 
 
     contentDiv.classList.add("content-div");
@@ -151,7 +147,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     lessonLikes.classList.add("lesson-likes");
 
-
     deleteButton.addEventListener("click", function(event) {
       let lessonId = parseInt(this.id);
 
@@ -159,11 +154,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
       deleteLesson(lessonId);
     });
 
-
     likeButton.addEventListener("click", function(event) {
-      let likeNum = this.parentElement
-      likeNum.innerText = parseInt(likeNum.innerText) + 1
-      likeLesson(parseInt(this.id), parseInt(likeNum.innerText))
+      let likeNum = this.parentElement;
+      likeNum.innerText = parseInt(likeNum.innerText) + 1;
+      likeLesson(parseInt(this.id), parseInt(likeNum.innerText));
     });
 
     append(lessonDiv, lessonName);
@@ -191,7 +185,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
       });
   }
-  mainFetch()
+  mainFetch();
 
   lessonForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -215,10 +209,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         mod_id: parseInt(mod),
         likes: 0,
       };
-      swal(`${data.name} was added!`)
-      setTimeout(window.location.reload.bind(window.location), 3000);
+      swal(`${data.name} was added!`);
+      // setTimeout(window.location.reload.bind(window.location), 3000);
       makeLesson(data);
-      this.reset();
+      // this.reset();
 
       lessonForm.style.display = "none";
       fetch(endPoint, {
@@ -255,106 +249,62 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   }
 
+  searchIcon = document.querySelector(".search-icon");
 
-  // function addEditForm() {
-  //   const editForm = createElement("form")
-  //   debugger
-  //
-  // }
-  //
-
-searchIcon = document.querySelector(".search-icon")
-
-searchIcon.addEventListener("click", beginSearch)
-
+  searchIcon.addEventListener("click", beginSearch);
 
   function addFormListener(formElement) {
     formElement.addEventListener("click", function(event) {
-      swal("Hello world!");
+      swal("Edit Functionality Coming Soon!");
 
-    })
+    });
   }
 
+  function beginSearch() {
+    swal({
+        text: 'Search for a lesson. e.g. "Ruby Froms".',
+        content: "input",
+        button: {
+          text: "Search!",
+          closeModal: false,
+        },
+      })
+      .then(name => {
+        // if (!name) throw null;
+        match(name, endPoint);
+      });
+  }
 
+  function match(names, url) {
+    return fetch(url)
+      .then(results => {
+        return results.json();
+      })
+      .then(json => {
+        return json.filter(lesson => {
+          console.log(names);
+          return lesson.name.includes(names);
+        });
+      })
 
-
-
-
-function beginSearch(){
-  swal({
-    text: 'Search for a lesson. e.g. "Ruby Froms".',
-    content: "input",
-    button: {
-      text: "Search!",
-      closeModal: false,
-    },
-  })
-  .then(name => {
-    // if (!name) throw null;
-    match(name, endPoint);
-  })
-}
-  // .then(results => {
-  //   return results.json();
-  // })
-  // .then(json => {
-  //   const store = json;
-  //   store.filter(lesson => {
-  //     debugger
-  //   })
-
-    // if (!movie) {
-    //   return swal("No movie was found!");
-    // }
-
-  //   swal({
-  //     title: "Top result:",
-  //     text: name,
-  //     icon: imageURL,
-  //   });
-  // })
-  // .catch(err => {
-  //   if (err) {
-  //     swal("Oh noes!", "The AJAX request failed!", "error");
-  //   } else {
-
-  //   }
-  // });
-
-function match(names, url){
-return fetch(url)
-.then(results => {
-  return results.json();
-})
-.then(json => {
-  return json.filter(lesson => {
-    console.log(names);
-    return lesson.name.includes(names)
-  })
-})
-
-
-
-.then(function(array){
-  let currentDivs = document.querySelectorAll(".col-sm")
-  currentDivs.forEach(name => name.classList.add("gone"))
-  checkEmpty(array)
-    array.map(person => {
-      makeLesson(person);
+      .then(function(array) {
+        let currentDivs = document.querySelectorAll(".col-sm");
+        currentDivs.forEach(name => name.classList.add("gone"));
+        checkEmpty(array);
+        array.map(person => {
+          makeLesson(person);
           swal.stopLoading();
           swal.close();
-    });
-})
-
-
-
-}
-function checkEmpty(array){
-  if (!array[0]) {
-    swal("Nothing was Found!")
-    setTimeout(window.location.reload.bind(window.location), 2000)
+        });
+      });
   }
-}
+
+  function checkEmpty(array) {
+    if (!array[0]) {
+      swal("Nothing was Found!");
+      setTimeout(window.location.reload.bind(window.location), 2000);
+    }
+  }
 
 
 
