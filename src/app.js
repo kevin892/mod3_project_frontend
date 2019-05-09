@@ -3,11 +3,19 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
+  const modUrlBase = "https://young-mesa-27326.herokuapp.com/api/v1/mods/";
+  const endPoint = 'https://young-mesa-27326.herokuapp.com/api/v1/lessons';
+  const container = document.querySelector(".container");
+  const lessonForm = document.querySelector(".lesson-form");
+  const toggleButton = document.querySelector(".toggle-button");
+
+  lessonForm.style.display = "none";
+
   function selectPage(mod) {
     let currentDivs = document.querySelectorAll(".col-sm");
     currentDivs.forEach(name => name.classList.add("gone"));
 
-    fetch(`http://localhost:3000/api/v1/mods/${mod}`)
+    fetch(`${modUrlBase}${mod}`)
       .then(response => response.json())
       .then(function(array) {
         array.lessons.map(person => {
@@ -17,30 +25,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   document.addEventListener("click", function(event) {
-
     switch (event.target.classList[1]) {
       case "mod-1-head":
-        return selectPage(1);
+        return selectPage(16);
       case "mod-2-head":
-        return selectPage(2);
+        return selectPage(17);
       case "mod-3-head":
-        return selectPage(3);
+        return selectPage(18);
       case "mod-4-head":
-        return selectPage(4);
+        return selectPage(19);
       case "mod-5-head":
-        return selectPage(5);
+        return selectPage(20);
       case "home-head":
         let currentDivs = document.querySelectorAll(".col-sm");
         currentDivs.forEach(name => name.classList.add("gone"));
         return mainFetch();
     }
   });
-
-  const endPoint = 'http://localhost:3000/api/v1/lessons';
-  const container = document.querySelector(".container");
-  const lessonForm = document.querySelector(".lesson-form");
-  lessonForm.style.display = "none";
-
 
   function createElement(element) {
     return document.createElement(element);
@@ -54,8 +55,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     return element.classList.add(className);
   }
 
-
-  const toggleButton = document.querySelector(".toggle-button");
   toggleButton.addEventListener("click", function() {
     if (lessonForm.style.display == '' || lessonForm.style.display == "block")
       lessonForm.style.display = 'none';
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     contentDiv = createElement("div");
 
     lessonName.innerHTML = lesson.name;
-
     lessonInstructor.innerHTML = "Instructor: " + lesson.instructor;
 
     if (lesson.mod_id) {
@@ -88,13 +86,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
       lessonMod.innerHTML = "Mod: " + lesson.mod.name;
     }
     if (lesson.video) {
-      lessonVideo.href = "http://" + lesson.video;
+      lessonVideo.href = lesson.video;
     } else {
       lessonVideo.style.display = "none";
     }
 
     if (lesson.code) {
-      lessonCode.href = "http://" + lesson.code;
+      lessonCode.href = lesson.code;
     } else {
       lessonCode.style.display = "none";
     }
@@ -180,7 +178,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     append(container, lessonDiv);
   }
 
-
   function mainFetch() {
     fetch(endPoint)
       .then(response => response.json())
@@ -194,7 +191,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   lessonForm.addEventListener("submit", function(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target),
       name = formData.get("name"),
       code = formData.get("code"),
@@ -215,7 +211,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         likes: 0,
       };
       swal("Sweet!", `${data.name} was added!`, "success");
-      // setTimeout(window.location.reload.bind(window.location), 2000);
       makeLesson(data);
       this.reset();
 
@@ -249,7 +244,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         video: videoUrl
       })
     }).then(swal("Success!!", "Lesson was updated!", "success"),
-      setTimeout(window.location.reload.bind(window.location), 2000))
+      setTimeout(window.location.reload.bind(window.location), 2000));
   }
 
   function editLessonCode(lessonId, codeUrl) {
@@ -262,9 +257,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         code: codeUrl
       })
     }).then(swal("Success!!", "Lesson was updated!", "success"),
-      setTimeout(window.location.reload.bind(window.location), 2000))
+      setTimeout(window.location.reload.bind(window.location), 2000));
   }
-
 
   function likeLesson(lessonId, data) {
     return fetch(endPoint + `/${lessonId}`, {
@@ -275,77 +269,69 @@ document.addEventListener('DOMContentLoaded', (event) => {
       body: JSON.stringify({
         likes: data
       })
-    });
+    })
   }
 
   searchIcon = document.querySelector(".search-icon");
-
   searchIcon.addEventListener("click", beginSearch);
-
 
   function editUi(id, video, code) {
 
-    swal("Which Lesson Type which you like to edit?", {
-        buttons: {
-          github: {
-            text: "GitHub Url",
-            value: "github"
-          },
-          youtube: {
-            text: "YouTube Url",
-            value: "youtube",
-          },
-          danger: {
-            text: "Exit",
-            value: "exit",
-          }
+    swal("Which Lesson Url which you like to edit?", {
+      buttons: {
+        github: {
+          text: "GitHub",
+          value: "github"
         },
-      })
-      .then((value) => {
-
-        if (value === "youtube") {
-          swal(`Current Value: ${video}`, {
-              title: "What would you like to change it to?",
-              content: "input",
-            })
-            .then((value) => {
-              editLessonVideo(lessonId, value)
-            });
-        } else if (value === "github") {
-          swal(`Current Value: ${code}`, {
-              title: "What would you like to change it to?",
-              content: "input",
-            })
-            .then((value) => {
-              editLessonCode(lessonId, value)
-            });
-        } else {
-          swal("Nevermind");
+        youtube: {
+          text: "YouTube",
+          value: "youtube",
+        },
+        danger: {
+          text: "Exit",
+          value: "exit",
         }
-      });
+      },
+    }).then((value) => {
 
+      if (value === "youtube") {
+        swal(`Current Value: ${video}`, {
+            title: "What would you like to change it to?",
+            content: "input",
+          })
+          .then((value) => {
+            if (value == "") {
+              swal("Nevermind");
+            } else {
+              editLessonVideo(lessonId, value);
+            }
+          });
+      } else if (value === "github") {
+        swal(`Current Value: ${code}`, {
+            title: "What would you like to change it to?",
+            content: "input",
+          })
+          .then((value) => {
+            if (value == "") {
+              swal("Nevermind");
+            } else {
+              editLessonCode(lessonId, value);
+            }
+          });
+      } else {
+        swal("Nevermind");
+      }
+    });
   }
-
 
   function addFormListener(formElement) {
     formElement.addEventListener("click", function(event) {
 
-      lessonId = this.parentElement.querySelectorAll("i")[3].id
-      videoUrl = this.parentElement.querySelectorAll("a")[0].href
-      codeUrl = this.parentElement.querySelectorAll("a")[1].href
+      lessonId = this.parentElement.querySelectorAll("i")[3].id;
+      videoUrl = this.parentElement.querySelectorAll("a")[0].href;
+      codeUrl = this.parentElement.querySelectorAll("a")[1].href;
 
-      editUi(lessonId, videoUrl, codeUrl)
-
-      //
-      //       let newCode = prompt("Please Enter Gitub URL"),
-      //        newVideo = prompt("Please Enter Video URL"),
-      //
-      //
-      //
-      //
-
-      // swal("Edit Functionality Coming Soon!");
-
+      editUi(lessonId, videoUrl, codeUrl);
     });
   }
 
@@ -359,7 +345,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         },
       })
       .then(name => {
-        // if (!name) throw null;
         match(name, endPoint);
       });
   }
@@ -372,7 +357,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .then(json => {
         return json.filter(lesson => {
           console.log(names);
-          return lesson.name.includes(names);
+          return lesson.name.toLowerCase().includes(names.toLowerCase());
         });
       })
 
@@ -391,10 +376,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   function checkEmpty(array) {
     if (!array[0]) {
       swal("Nothing was Found!");
-      setTimeout(window.location.reload.bind(window.location), 2000);
+      setTimeout(window.location.reload.bind(window.location), 1000);
     }
   }
-
-
 
 });

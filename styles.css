@@ -7,7 +7,7 @@
 
 .navbar {
   margin-bottom: 40px !important;
-  /* font-family: 'Questrial', sans-serif; */
+  font-family: 'Questrial', sans-serif;
   font-size: 25px;
 }
 
@@ -17,19 +17,21 @@
 }
 
 body {
-  /* background-color: #CAEBF2 !important; */
+  background-color: #CAEBF2 !important;
 }
+
 
 h1 {
   text-align: center;
   font-size: 75px !important;
-  /* font-family: 'Abril Fatface', cursive !important; */
+  font-family: 'Abril Fatface', cursive !important;
 }
 
 h2 {
   padding-top: 20px !important;
   text-align: center;
   font-size: 35px !important;
+  font-family: 'Francois One', sans-serif;
   /* font-family: 'Kalam', cursive; */
 }
 
@@ -40,18 +42,18 @@ h2 {
 
 .col-sm {
   border: 3px outset grey;
-  /* background-image: url(/images/flashcard.png); */
+  background-image: url(/images/flashcard.png);
   background-size: 420px;
   text-align: right;
   border-radius: 5px;
   margin: 10px;
   height: 20rem;
   width: 32rem !important;
-  /* box-shadow: 10px 10px grey !important; */
+  box-shadow: 10px 10px grey !important;
 }
 
 .lesson-form {
-  /* border: 3px outset grey; */
+  border: 3px outset grey;
   padding: 30px;
   width: 500px;
   box-shadow: 10px 10px grey !important;
@@ -70,7 +72,7 @@ h2 {
 
 .mod-form-div {
   position: absolute;
-  top: 680px;
+  top: 684px;
   left: 375px;
 }
 .form-add-button {
@@ -79,8 +81,6 @@ h2 {
   position: absolute;
   top: 820px;
 }
-
-
 
 .delete-button {
   cursor: pointer;
@@ -160,18 +160,17 @@ hr {
 }
 .code-icon {
   font-size: 90px;
-  /* color: #385170; */
+  color: #385170;
   position: absolute;
   bottom: 90px;
-  right: 40px;
+  right: 75px;
   opacity: 0.9;
 }
 
 .like-icon {
   cursor: pointer;
   font-size: 40px;
-  /* color: #facf5a; */
-  ;
+  color: #facf5a;
   position: absolute;
   bottom: 1px;
   left: 30px;
@@ -179,10 +178,10 @@ hr {
 
 .video-icon {
   font-size: 90px;
-  /* color: #df0054; */
+  color: #df0054;
   position: absolute;
   bottom: 90px;
-  right: 170px;
+  right: 200px;
   opacity: 0.8;
 }
 
