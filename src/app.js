@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
 
-  const modUrlBase = "https//localhost:3000/api/v1/mods/";
-  const endPoint = 'http://localhost:3000/api/v1/lessons';
+  const modUrlBase = "https://young-mesa-27326.herokuapp.com/api/v1/mods/";
+  const endPoint = 'https://young-mesa-27326.herokuapp.com/api/v1/lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
   const toggleButton = document.querySelector(".toggle-button");
