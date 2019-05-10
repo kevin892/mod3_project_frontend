@@ -1,8 +1,26 @@
 .stand-list {
   margin-bottom: 100px !important;
-  font-family: 'Francois One', sans-serif;
+  font-family: 'Questrial', sans-serif;
+  font-size: 30px;
+  background-color: #ffeaa5;
+  padding: 25px;
+  border: 3px outset grey;
+  width: 66rem;
+  border-radius: 5px;
+  box-shadow: 10px 10px grey !important;
+}
+.under-line {
+  background: black;
+  margin: 0px;
+  height: 3px;
+  position: absolute;
+  /* left: 50px; */
 }
 
+.standards-list {
+  margin-top: 30px;
+  font-size: 20px;
+}
 
 .logo-img {
   height: 200px;
@@ -140,9 +158,9 @@ h2 {
   left: 200px;
 
 }
-hr {
+/* hr {
   margin-top: 50px !important;
-}
+} */
 .search-icon{
     cursor: pointer;
     font-size: 40px;
