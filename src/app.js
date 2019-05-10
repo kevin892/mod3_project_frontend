@@ -5,41 +5,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
 
-
-
-
-  const modUrlBase = "http://localhost:3000/api/v1/mods/";
-  const endPoint = 'http://localhost:3000/api/v1//lessons';
+  const modUrlBase = "https://young-mesa-27326.herokuapp.com//api/v1/mods/";
+  const endPoint = 'https://young-mesa-27326.herokuapp.com//api/v1//lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
   const toggleButton = document.querySelector(".toggle-button");
-  const standardsList = document.querySelector(".standards-list")
-  const standList = document.querySelector(".stand-list")
+  const standardsList = document.querySelector(".standards-list");
+  const standList = document.querySelector(".stand-list");
 
   lessonForm.style.display = "none";
-  standList.style.display = "none"
+  standList.style.display = "none";
 
 
   function selectPage(mod) {
     let currentDivs = document.querySelectorAll(".col-sm");
     currentDivs.forEach(name => name.classList.add("gone"));
-    standardsList.innerHTML = ''
-    createElement()
+    standardsList.innerHTML = '';
+    createElement();
 
     fetch(`${modUrlBase}${mod}`)
       .then(response => response.json())
       .then(function(array) {
         array.standards.map(person => {
 
-          standList.style.display = "block"
-          let standard = createElement("li")
-          standard.innerHTML = person.name
+          standList.style.display = "block";
+          let standard = createElement("li");
+          standard.innerHTML = person.name;
 
-          append(standardsList, standard)
+          append(standardsList, standard);
         });
       });
-
-
 
     fetch(`${modUrlBase}${mod}`)
       .then(response => response.json())
@@ -64,7 +59,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return selectPage(5);
       case "home-head":
         let currentDivs = document.querySelectorAll(".col-sm");
-        standList.style.display = "none"
+        standList.style.display = "none";
         currentDivs.forEach(name => name.classList.add("gone"));
         return mainFetch();
     }
