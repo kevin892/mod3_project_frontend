@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         likes: 0,
       };
       swal("Sweet!", `${data.name} was added!`, "success");
+      setTimeout(window.location.reload.bind(window.location), 2000)
       makeLesson(data);
       this.reset();
 
