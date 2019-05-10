@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
 
-  const modUrlBase = "https://young-mesa-27326.herokuapp.com//api/v1/mods/";
-  const endPoint = 'https://young-mesa-27326.herokuapp.com//api/v1//lessons';
+  const modUrlBase = "https//localhost:3000/api/v1/mods/";
+  const endPoint = 'http://localhost:3000/api/v1/lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
   const toggleButton = document.querySelector(".toggle-button");
@@ -108,21 +108,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
       lessonMod.innerHTML = "Mod: " + lesson.mod.name;
     }
     if (lesson.video) {
-      if (lesson.video.includes("http")){
-      lessonVideo.href = lesson.video;
-    }else {
-      lessonVideo.href = `https://${lesson.video}`;
-    }
+      if (lesson.video.includes("http")) {
+        lessonVideo.href = lesson.video;
+      } else {
+        lessonVideo.href = `https://${lesson.video}`;
+      }
     } else {
       lessonVideo.style.display = "none";
     }
 
     if (lesson.code) {
-      if (lesson.code.includes("http")){
-      lessonCode.href = lesson.code;
-    }else {
-      lessonCode.href = `https://${lesson.code}`;
-    }
+      if (lesson.code.includes("http")) {
+        lessonCode.href = lesson.code;
+      } else {
+        lessonCode.href = `https://${lesson.code}`;
+      }
     } else {
       lessonCode.style.display = "none";
     }
@@ -243,6 +243,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       swal("Sweet!", `${data.name} was added!`, "success");
       makeLesson(data);
       this.reset();
+
 
       lessonForm.style.display = "none";
       fetch(endPoint, {
