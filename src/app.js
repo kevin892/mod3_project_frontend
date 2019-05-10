@@ -1,19 +1,45 @@
 /*jshint esversion: 6 */
 
+
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 
-  const modUrlBase = "https://young-mesa-27326.herokuapp.com/api/v1/mods/";
-  const endPoint = 'https://young-mesa-27326.herokuapp.com/api/v1/lessons';
+
+
+
+
+  const modUrlBase = "http://localhost:3000/api/v1/mods/";
+  const endPoint = 'http://localhost:3000/api/v1//lessons';
   const container = document.querySelector(".container");
   const lessonForm = document.querySelector(".lesson-form");
   const toggleButton = document.querySelector(".toggle-button");
+  const standardsList = document.querySelector(".standards-list")
+  const standList = document.querySelector(".stand-list")
 
   lessonForm.style.display = "none";
+  standList.style.display = "none"
+
 
   function selectPage(mod) {
     let currentDivs = document.querySelectorAll(".col-sm");
     currentDivs.forEach(name => name.classList.add("gone"));
+    standardsList.innerHTML = ''
+    createElement()
+
+    fetch(`${modUrlBase}${mod}`)
+      .then(response => response.json())
+      .then(function(array) {
+        array.standards.map(person => {
+
+          standList.style.display = "block"
+          let standard = createElement("li")
+          standard.innerHTML = person.name
+
+          append(standardsList, standard)
+        });
+      });
+
+
 
     fetch(`${modUrlBase}${mod}`)
       .then(response => response.json())
@@ -27,17 +53,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.addEventListener("click", function(event) {
     switch (event.target.classList[1]) {
       case "mod-1-head":
-        return selectPage(16);
+        return selectPage(1);
       case "mod-2-head":
-        return selectPage(17);
+        return selectPage(2);
       case "mod-3-head":
-        return selectPage(18);
+        return selectPage(3);
       case "mod-4-head":
-        return selectPage(19);
+        return selectPage(4);
       case "mod-5-head":
-        return selectPage(20);
+        return selectPage(5);
       case "home-head":
         let currentDivs = document.querySelectorAll(".col-sm");
+        standList.style.display = "none"
         currentDivs.forEach(name => name.classList.add("gone"));
         return mainFetch();
     }
@@ -86,13 +113,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
       lessonMod.innerHTML = "Mod: " + lesson.mod.name;
     }
     if (lesson.video) {
+      if (lesson.video.includes("http")){
       lessonVideo.href = lesson.video;
+    }else {
+      lessonVideo.href = `https://${lesson.video}`;
+    }
     } else {
       lessonVideo.style.display = "none";
     }
 
     if (lesson.code) {
+      if (lesson.code.includes("http")){
       lessonCode.href = lesson.code;
+    }else {
+      lessonCode.href = `https://${lesson.code}`;
+    }
     } else {
       lessonCode.style.display = "none";
     }
@@ -204,8 +239,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     } else {
       const data = {
         name: name,
-        code: code.substring(8),
-        video: video.substring(8),
+        code: code,
+        video: video,
         instructor: instructor,
         mod_id: parseInt(mod),
         likes: 0,
@@ -269,7 +304,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       body: JSON.stringify({
         likes: data
       })
-    })
+    });
   }
 
   searchIcon = document.querySelector(".search-icon");
